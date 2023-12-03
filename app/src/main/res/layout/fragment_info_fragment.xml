@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/about_fragment"
+    tools:context=".about_fragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/vina"
+            android:text="About Us"
+            android:textSize="35dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:text="STARKTECH Ventures Private Limited."
+            android:textColor="#D71313"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:justificationMode="inter_word"
+            android:padding="20dp"
+            android:text="          Welcome to STARKTECH, an Aggrotech Company revolutionizing the Indian Boiler Poultry Industry through cutting-edge technologies. Our commitment lies in “Empowering  Farmers Through Innovations” with high-tech equipment, and we operate from our headquarters at Near RPP ITI College, Takari Road, Rajaramnagar Islampur, Maharashtra 415414.
+\n Our Vision
+“To be the leading, innovative Poultry Farming equipment manufacturer Focusing on empowering the Poultry industry through technology across the world”.
+Our Flagship Product: Bird Collection Lifting, Weighing, and Counting Machine - The Special Purpose Vehicle (SPV) \n
+       At the heart of our mission is our  product, The Bird Collection Lifting, Weighing, and Counting Machine. This Special Purpose Vehicle (SPV) is meticulously designed to streamline and optimize poultry farming processes, marking a significant leap forward in efficiency and productivity."
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="180dp"
+            android:text="Why Choose STARKTECH:"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.065"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:justificationMode="inter_word"
+            android:padding="20dp"
+            android:text="•	Innovation: We are at the forefront of integrating innovation into poultry farming, ensuring our customers stay ahead in a rapidly evolving industry.
+\n•	Customer-Centric Approach: Our commitment to customer satisfaction is unwavering. We prioritize understanding the unique needs of each poultry farmer and tailor our solutions accordingly.
+"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</FrameLayout>

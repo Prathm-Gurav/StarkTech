@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "444766960973",
+    "project_id": "techspark-1e21a",
+    "storage_bucket": "techspark-1e21a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444766960973:android:0e4f02f4461d9903120b04",
+        "android_client_info": {
+          "package_name": "com.example.techspark"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRND8mp61hkkH6YVKa1mAmwmhVfhrO1C4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
