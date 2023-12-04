@@ -53,7 +53,6 @@ public class SignUp extends AppCompatActivity {
         mUser = mAuth.getCurrentUser();
         db= FirebaseDatabase.getInstance();
         progressDialog = new ProgressDialog(this);
-        otp = String.valueOf(random.nextInt(100000));
     }
 
     public void register(View view) {
@@ -98,6 +97,7 @@ public class SignUp extends AppCompatActivity {
 
 
     public void sendOTP() {
+        otp = String.valueOf(random.nextInt(100000));
         String mob = t3.getText().toString().trim();
         String username = t1.getText().toString().trim();
 
@@ -127,10 +127,10 @@ public class SignUp extends AppCompatActivity {
         String mobile = t3.getText().toString();
         String emailaddress = t3.getText().toString();
         String password = t4.getText().toString().trim();
+        String conpassword = t5.getText().toString().trim();
         emailaddress += "@gmail.com";
         if (!otpn.equals("")) {
             if (otp.equals(otpn)) {
-
                 progressDialog.setMessage("Please wait while Registration Complete...");
                 progressDialog.setTitle("Registration");
                 progressDialog.setCanceledOnTouchOutside(false);
@@ -143,7 +143,7 @@ public class SignUp extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if (task.isComplete()) {
+                        if (task.isSuccessful()) {
                             String id = task.getResult().getUser().getUid().toString();
                             db.getReference().child("users").child(id).setValue(v);
                             progressDialog.dismiss();
@@ -152,7 +152,14 @@ public class SignUp extends AppCompatActivity {
                             i.putExtra("flag",1);
                             startActivity(i);
                         } else {
-                            Toast.makeText(getApplicationContext(), "" + task.getException(), Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
+                            t1.setText("");
+                            t2.setText("");
+                            t3.setText("");
+                            t4.setText("");
+                            t5.setText("");
+                            t6.setText("");
+                            Toast.makeText(getApplicationContext(),"User Already Exist!!", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

@@ -107,10 +107,9 @@ public class login_activity extends AppCompatActivity {
         Intent i = new Intent(this,SignUp.class);
         startActivity(i);
     }
-
     public void forgotPassword(View view) {
         Toast.makeText(this, "cliecked", Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(getApplicationContext(),ChangePassword1.class);
+        Intent i = new Intent(this,ChangePassword1.class);
         startActivity(i);
     }
 }

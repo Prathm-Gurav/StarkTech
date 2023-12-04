@@ -53,7 +53,6 @@ public class ChangePassword1 extends AppCompatActivity {
         t3.setEnabled(false);
         t4.setEnabled(false);
         flag=0;
-        otp= String.valueOf(random.nextInt(100000));
         db= FirebaseFirestore.getInstance();
     }
 
@@ -97,11 +96,9 @@ public class ChangePassword1 extends AppCompatActivity {
         }
     }
     public void sendOTP(){
+        otp= String.valueOf(random.nextInt(100000));
         mob=t1.getText().toString().trim();
-
-
-        String msg="Hii, Welcome to my application.\nTo change your account password please verify with the Otp.\nYour otp is : " +otp;
-
+        String msg="Hii, Welcome to BHM.\nTo change your account password please verify with the Otp.\nYour otp is : " +otp;
         if (!mob.equals("")&& !msg.equals("")){
             SmsManager smsManager=SmsManager.getDefault();
             smsManager.sendTextMessage(mob,null,msg,null,null);
