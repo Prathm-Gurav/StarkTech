@@ -46,7 +46,6 @@
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/white"
         android:text="Next"
-        android:onClick="gotomainpage"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

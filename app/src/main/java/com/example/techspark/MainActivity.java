@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .replace(R.id.fragment_container, fragment)
                     .commit();
 
+            //Toast.makeText(this, ""+mobile, Toast.LENGTH_SHORT).show();
+
         }
          if (item.getItemId()==R.id.about_nav){
 

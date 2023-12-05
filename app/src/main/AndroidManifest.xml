@@ -19,6 +19,9 @@
         android:theme="@style/Theme.TechSpark"
         tools:targetApi="34">
         <activity
+            android:name=".changepassword"
+            android:exported="false" />
+        <activity
             android:name=".mainpage"
             android:exported="false" />
         <activity

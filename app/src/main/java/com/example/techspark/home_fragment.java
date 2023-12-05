@@ -1,6 +1,7 @@
 package com.example.techspark;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -21,18 +22,17 @@ public class home_fragment extends Fragment {
     ImageView success;
     ProgressBar progressBar;
 
-    Button establishConnection,nextbutton;
+    Button establishConnection;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home_fragment, container, false);
-        success = view.findViewById(R.id.imageview1);
-        progressBar = view.findViewById(R.id.progressbar);
-        progressBar.setVisibility(View.INVISIBLE);
+//        success = view.findViewById(R.id.imageview1);
+//        progressBar = view.findViewById(R.id.progressbar);
+//        progressBar.setVisibility(View.INVISIBLE);
 
         establishConnection = view.findViewById(R.id.establishconn);
-        nextbutton = view.findViewById(R.id.nxtbtn);
         establishConnection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,28 +40,12 @@ public class home_fragment extends Fragment {
             }
 
             private void establishConnection(View view) {
-                int delayMillis = 3000;
-                progressBar.setVisibility(View.VISIBLE);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Hide the ProgressBar after the delay
-                        progressBar.setVisibility(View.GONE);
-                        success.setImageResource(R.drawable.tickmark);
-                        Toast.makeText(view.getContext(), "Connection Established", Toast.LENGTH_SHORT).show();
-                    }
-                }, delayMillis);
-            }
-        });
-
-        nextbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
+                Toast.makeText(view.getContext(), "Connection Established", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(view.getContext(), tokengeneration.class);
                 startActivity(i);
             }
         });
+
         return view;
     }
 }

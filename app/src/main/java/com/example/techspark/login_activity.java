@@ -81,6 +81,9 @@ public class login_activity extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
                                         Toast.makeText(login_activity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                         Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        i.putExtra("mobile",mobile);
+                                        //Toast.makeText(login_activity.this, ""+mobile, Toast.LENGTH_SHORT).show();
                                         startActivity(i);
                                     } else {
                                         // If sign in fails, display a message to the user.
@@ -109,7 +112,7 @@ public class login_activity extends AppCompatActivity {
     }
     public void forgotPassword(View view) {
         Toast.makeText(this, "cliecked", Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(this,ChangePassword1.class);
+        Intent i = new Intent(this,changepassword.class);
         startActivity(i);
     }
 }

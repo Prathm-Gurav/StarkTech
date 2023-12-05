@@ -4,8 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,18 +27,24 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 public class mainpage extends AppCompatActivity {
 
-    Button editButton,nextBatchButton,totalBirdCountButton,averageButton,cancelButton,okButton;
+    int lot_count =1;
+    RecyclerView r1;
+    List<String> list ;
+    lifting_chart_adapter adapter;
+    Button editButton,nextBatchButton,totalBirdCountButton,birdWeightButton,okButton;
     CardView totalBirdCountMinusButton,totalBirdCountAddButton;
-    CardView averageMinusButton,averageAddButton;
-    LinearLayout totalBirdCountLinearLayout,averageLinearLayout;
-    EditText editTotalBirdCountEditText,editAverageEditText,edittextInitialBirdCount;
-    EditText totalBirdCountEditText,averageEditText,totalBirdWeightEditText;
+    CardView birdWeightMinusButton,birdWeightAddButton;
+    LinearLayout totalBirdCountLinearLayout,birdWeightLinearLayout;
+    EditText editTotalBirdCountEditText,editBirdWeightEditText,edittextInitialBirdCount;
+    EditText totalBirdCountEditText,birdWeightEditText,totalBirdWeightEditText;
     FirebaseFirestore db;
     DocumentReference documentReference;
     @Override
@@ -48,23 +59,28 @@ public class mainpage extends AppCompatActivity {
         totalBirdCountAddButton=findViewById(R.id.button_add_total_bird_count);
         totalBirdCountMinusButton=findViewById(R.id.button_minus_total_bird_count);
 
-        averageAddButton=findViewById(R.id.button_add_average);
-        averageMinusButton=findViewById(R.id.button_minus_average);
+        birdWeightAddButton=findViewById(R.id.button_add_bird_weight);
+        birdWeightMinusButton=findViewById(R.id.button_minus_bird_weight);
 
         totalBirdCountLinearLayout=findViewById(R.id.linear_total_bird_count);
-        averageLinearLayout=findViewById(R.id.linear_average);
+        birdWeightLinearLayout=findViewById(R.id.bird_weight);
 
         editTotalBirdCountEditText=findViewById(R.id.edittext_total_bird_count_edit);
-        editAverageEditText=findViewById(R.id.edittext_average_edit);
+        editBirdWeightEditText=findViewById(R.id.edittext_bird_weight_edit);
 
         totalBirdCountEditText=findViewById(R.id.edittext_total_bird_count);
         totalBirdWeightEditText=findViewById(R.id.edittext_totalbw);
-        averageEditText=findViewById(R.id.edittext_average);
+        birdWeightEditText=findViewById(R.id.edittext_bw);
 
         totalBirdCountButton=findViewById(R.id.button_total_bird_count);
-        averageButton=findViewById(R.id.button_average);
-        cancelButton=findViewById(R.id.button_cancel);
+        birdWeightButton=findViewById(R.id.button_bird_weight);
         okButton=findViewById(R.id.button_ok);
+        r1=findViewById(R.id.recycler_view_id);
+        list = new ArrayList<>();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        r1.setLayoutManager(layoutManager);
+        adapter = new lifting_chart_adapter(this, list);
+        r1.setAdapter(adapter);
 
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,8 +88,7 @@ public class mainpage extends AppCompatActivity {
                 editButton.setVisibility(View.GONE);
                 nextBatchButton.setVisibility(View.GONE);
                 totalBirdCountButton.setVisibility(View.VISIBLE);
-                averageButton.setVisibility(View.VISIBLE);
-                cancelButton.setVisibility(View.VISIBLE);
+                birdWeightButton.setVisibility(View.VISIBLE);
             }
         });
 
@@ -83,28 +98,17 @@ public class mainpage extends AppCompatActivity {
                 totalBirdCountLinearLayout.setVisibility(View.VISIBLE);
                 okButton.setVisibility(View.VISIBLE);
                 totalBirdCountButton.setVisibility(View.GONE);
-                averageButton.setVisibility(View.GONE);
+                birdWeightButton.setVisibility(View.GONE);
             }
         });
 
-        averageButton.setOnClickListener(new View.OnClickListener() {
+        birdWeightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                averageLinearLayout.setVisibility(View.VISIBLE);
+                birdWeightLinearLayout.setVisibility(View.VISIBLE);
                 okButton.setVisibility(View.VISIBLE);
-                averageButton.setVisibility(View.GONE);
+                birdWeightButton.setVisibility(View.GONE);
                 totalBirdCountButton.setVisibility(View.GONE);
-            }
-        });
-
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editButton.setVisibility(View.VISIBLE);
-                nextBatchButton.setVisibility(View.VISIBLE);
-                totalBirdCountButton.setVisibility(View.GONE);
-                averageButton.setVisibility(View.GONE);
-                cancelButton.setVisibility(View.GONE);
             }
         });
 
@@ -112,12 +116,11 @@ public class mainpage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 totalBirdCountLinearLayout.setVisibility(View.GONE);
-                averageLinearLayout.setVisibility(View.GONE);
+                birdWeightLinearLayout.setVisibility(View.GONE);
                 editButton.setVisibility(View.VISIBLE);
                 nextBatchButton.setVisibility(View.VISIBLE);
                 totalBirdCountButton.setVisibility(View.GONE);
-                averageButton.setVisibility(View.GONE);
-                cancelButton.setVisibility(View.GONE);
+                birdWeightButton.setVisibility(View.GONE);
                 okButton.setVisibility(View.GONE);
             }
         });
@@ -127,35 +130,36 @@ public class mainpage extends AppCompatActivity {
         totalBirdCountMinusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int num=Integer.parseInt(totalBirdCountEditText.getText().toString())-1;
+                int num=Integer.parseInt(edittextInitialBirdCount.getText().toString())-1;
                 editTotalBirdCountEditText.setText(String.valueOf(num));
-                totalBirdCountEditText.setText(String.valueOf(num));
+                edittextInitialBirdCount.setText(String.valueOf(num));
             }
         });
 
         totalBirdCountAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int num=Integer.parseInt(totalBirdCountEditText.getText().toString())+1;
+                int num=Integer.parseInt(edittextInitialBirdCount.getText().toString())+1;
                 editTotalBirdCountEditText.setText(String.valueOf(num));
-                totalBirdCountEditText.setText(String.valueOf(num));
+                edittextInitialBirdCount.setText(String.valueOf(num));
             }
         });
 
-        averageMinusButton.setOnClickListener(new View.OnClickListener() {
+        birdWeightMinusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int num=Integer.parseInt(totalBirdWeightEditText.getText().toString())-1;
-                totalBirdWeightEditText.setText(String.valueOf(num));
-                totalBirdWeightEditText.setText(String.valueOf(num));
+                int num=Integer.parseInt(editBirdWeightEditText.getText().toString())-1;
+                birdWeightEditText.setText(String.valueOf(num));
+                editBirdWeightEditText.setText(String.valueOf(num));
             }
         });
 
-        averageAddButton.setOnClickListener(new View.OnClickListener() {
+        birdWeightAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int num=Integer.parseInt(totalBirdWeightEditText.getText().toString())+1;
-                totalBirdWeightEditText.setText(String.valueOf(num));
+                int num=Integer.parseInt(editBirdWeightEditText.getText().toString())+1;
+                birdWeightEditText.setText(String.valueOf(num));
+                editBirdWeightEditText.setText(String.valueOf(num));
             }
         });
 
@@ -179,20 +183,45 @@ public class mainpage extends AppCompatActivity {
                 }
             }
         });
+
+        edittextInitialBirdCount.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                int data=Integer.parseInt(edittextInitialBirdCount.getText().toString());
+                if(data%25==0) {
+                    list.add(""+(lot_count++));
+                    adapter.notifyItemInserted(list.size() - 1);
+                }
+            }
+        });
     }
 
     public void gotoNextBatch(View view){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> data = new HashMap<>();
         data.put("total_count",0);
-
         db.collection("hen_data").document("count_data").set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                }
                 edittextInitialBirdCount.setText("0");
+                birdWeightEditText.setText("0");
+                editTotalBirdCountEditText.setText("0");
+                editBirdWeightEditText.setText("0");
             }
         });
     }
-
-
+    public  void gotoHomePage(View view){
+        Intent i  = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
 }

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".SignUp"
     android:background="#232D3F">
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,7 +37,7 @@
                 android:layout_height="47dp"
                 android:layout_marginTop="36dp"
                 android:ems="10"
-                android:hint="User Name"
+                android:hint="Farmer Name"
                 android:inputType="text"
                 android:paddingLeft="20dp"
                 android:background="@drawable/editext_design"

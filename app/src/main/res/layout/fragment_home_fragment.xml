@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
     <Button
         android:layout_width="match_parent"
@@ -19,6 +19,7 @@
         android:layout_marginEnd="40dp"
         android:layout_marginTop="40dp"
         android:textStyle="bold"
+        android:textSize="18dp"
         android:id="@+id/establishconn"
         android:textColor="@color/black"
         android:onClick="establishconnection"
@@ -26,33 +27,137 @@
         android:backgroundTint="#FFFFFF"
         />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Next"
-        android:layout_alignParentEnd="true"
-        android:onClick="nextpage"
-        android:id="@+id/nxtbtn"
-        android:enabled="true"
-        android:layout_alignParentBottom="true"
-        android:textStyle="bold"
-        android:layout_marginEnd="20dp"
-        android:textColor="@color/black"
-        android:backgroundTint="#FFFFFF"
-        android:layout_marginBottom="20dp"
-        />
 
-    <ImageView
-        android:id="@+id/imageview1"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerInParent="true" />
-    <ProgressBar
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:visibility="invisible"
-        android:layout_centerInParent="true"
-        android:id="@+id/progressbar"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/establishconn"
+            android:layout_marginTop="30dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/outerline1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/print"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingBottom="10dp"
+                        android:text="Online Print"
+                        android:layout_gravity="center"
+                        android:textColor="#FDFCFC"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/outerline1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/pasthistory"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingBottom="10dp"
+                        android:text="Past History"
+                        android:layout_gravity="center"
+                        android:textColor="#FDFCFC"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/outerline1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/share"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingBottom="10dp"
+                        android:text="Share"
+                        android:layout_gravity="center"
+                        android:textColor="#FDFCFC"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/outerline1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="140dp"
+                        android:layout_height="70dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/downloadicon"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingBottom="10dp"
+                        android:text="Online Print"
+                        android:layout_gravity="center"
+                        android:textColor="#FDFCFC"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
     </RelativeLayout>
+
+
 </FrameLayout>
